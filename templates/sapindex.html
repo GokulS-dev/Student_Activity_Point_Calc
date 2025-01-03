@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Cards with Transitions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .container1 {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+        .container1 a {
+            text-decoration: none;
+        }
+        .card {
+            width: 250px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .card h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .card p {
+            font-size: 16px;
+            color: #666;
+        }
+    </style>
+    <!--Bootstrap-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/style2.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <img src="../static/WhatsApp Image 2024-04-29 at 21.40.47_30824d57.jpg" width="30px" height="30px"
+                    class="mr-2" alt="Logo">
+                Kongu Engineering College
+            </a>
+        </div>
+    </nav>
+    <div class="container1 pt-5">
+        <a href="/Techno" class="card-link">
+        <div class="card">
+            <h2>Techno</h2>
+            <p>Explore the latest in technology</p>
+        </div>
+        </a>
+        <a href="/Sports" class="card-link">
+        <div class="card">
+            <h2>Sports/Games</h2>
+            <p>Get active with sports and games</p>
+        </div>
+        </a>
+        <a href="/Membership" class="card-link">
+        <div class="card">
+            <h2>Membership</h2>
+            <p>Join our exclusive membership</p>
+        </div>
+        </a>
+        <a href="/Leadership" class="card-link">
+            <div class="card">
+                <h2>Leadership</h2>
+                <p>Develop leadership skills</p>
+            </div>
+        </a>
+        <a href="/OnlineCourses" class="card-link">
+            <div class="card">
+                <h2>Online Course</h2>
+                <p>Expand your knowledge with online courses</p>
+            </div>
+        </a>
+        <a href="/Copyright" class="card-link">
+            <div class="card">
+                <h2>Copyright</h2>
+                <p>Protect your intellectual property</p>
+            </div>
+        </a>
+        <a href="/Govt" class="card-link">
+            <div class="card">
+                <h2>Govt Exams</h2>
+                <p>Prepare for government exams</p>
+            </div>
+        </a>
+        <a href="/Internships" class="card-link">
+            <div class="card">
+                <h2>Internships</h2>
+                <p>Find valuable internship opportunities</p>
+            </div>
+        </a>
+        <a href="/Entrepreneurships" class="card-link">
+            <div class="card">
+                <h2>Entrepreneurships</h2>
+                <p>Embark on your entrepreneurial journey</p>
+            </div>
+        </a>
+        <a href="/Social" class="card-link">
+            <div class="card">
+                <h2>Social Activities</h2>
+                <p>Engage in meaningful social activities</p>
+            </div>
+        </a>
+
+    </div>
+</body>
+</html>

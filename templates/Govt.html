@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Govt Exams Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        .container1 {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        label {
+            font-weight: bold;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            background-color: #FFBF00;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #eeb70f;
+        }
+    </style>
+    <!--Bootstrap-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/style2.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <img src="../static/WhatsApp Image 2024-04-29 at 21.40.47_30824d57.jpg" width="30px" height="30px"
+                    class="mr-2" alt="Logo">
+                Kongu Engineering College
+            </a>
+        </div>
+    </nav>
+    <div class="container1">
+        <h2>Govt Exams Form</h2>
+        <form id="GovtForm">
+            <label for="govtExams">Govt exams:</label>
+            <select name="govtExams" id="govtExams">
+                <option value="appeared">Appeared</option>
+                <option value="qualifiedGateCat">Qualified GATE/CAT</option>
+                <option value="topRankingGateCat">Top Ranking GATE/CAT</option>
+                <option value="clearedGovtExams">Cleared Govt Exams</option>
+            </select>
+
+            <label for="certificate">Upload Certificate:</label><br>
+            <input type="file" name="certificate" id="certificate" accept=".pdf,.jpg,.png">
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+
+        <div id="result" style="margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        document.getElementById("GovtForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            var govtExams = document.getElementById("govtExams").value;
+
+            var points = 0;
+            switch (govtExams) {
+                case 'appeared':
+                    points = 2;
+                    break;
+                case 'qualifiedGateCat':
+                    points = 30;
+                    break;
+                case 'topRankingGateCat':
+                case 'clearedGovtExams':
+                    points = 100;
+                    break;
+            }
+
+            var formData = new FormData();
+            formData.append("govtExams", govtExams);
+            formData.append("certificate", document.getElementById("certificate").files[0]);
+            formData.append("points", points);
+            formData.append("roll_no", localStorage.getItem("rollno"));
+
+            fetch("/submitParticipationForm", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("result").innerText = "Points: " + points;
+                window.location.href = "/studentprofile";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>

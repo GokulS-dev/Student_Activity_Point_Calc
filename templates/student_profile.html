@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+  <title>student_login</title>
+  <link rel="stylesheet" href="../static/style2.css" />
+  <style>
+    body {
+      height: 100vh !important;
+      background-color: #ffffff;
+      margin-top: 70px;
+      /* Add margin to the top */
+      /* overflow: hidden; Prevent scrolling */
+    }
+
+    .form-container {
+      overflow: hidden;
+      /* Prevent scrolling within the form container */
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a href="#" class="navbar-brand">
+        <img src="../static/WhatsApp Image 2024-04-29 at 21.40.47_30824d57.jpg" width="30px" height="30px" class="mr-2" alt="Logo">
+        Kongu Engineering College
+      </a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 d-flex justify-content-center align-items-center">
+        <div class="text-center pt-5">
+          <h2>Welcome to the <span style="color: orange;">SAP</span></h2>
+          <p class="pt-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea fuga laudantium quisquam qui
+            delectus voluptate ipsum rerum dignissimos ullam, obcaecati dolores neque quod aliquam incidunt explicabo,
+            laboriosam dolorum? Magnam, labore?</p>
+          <img src="../static/undraw_online_test_re_kyfx.svg" alt="" style="width: 200px; height: 200px;" class="pt-3">
+        </div>
+      </div>
+      <div class="col-sm-6 text-center pt-5">
+        <h5>Name</h5>
+        <p id="name"></p>
+        <hr>
+        <h5>Total SAP points</h5>
+        <p id="points"></p>
+        <hr>
+        <h5>Roll no</h5>
+        <p id="rollno"></p>
+        <hr>
+        <h5>Semester</h5>
+        <p id="semester"></p>
+        <hr>
+        <h5 style="padding-top: 25px; color: orange;" id="h5"></h5>
+      </div>
+    </div>
+  </div>
+  <script>
+    window.onload = async () => {
+      document.getElementById('name').innerText = localStorage.getItem('name');
+      document.getElementById('rollno').innerText = localStorage.getItem('rollno');
+      document.getElementById('semester').innerText = localStorage.getItem('semester');
+      let rollno = document.getElementById('rollno').innerText;
+      let query = `http://127.0.0.1:5000/showsap?rollno=${rollno}`;
+      try {
+        const response = await fetch(query);
+        if (!response.ok) {
+          throw new Error("An unexpected error occurred!");
+        }
+        const data = await response.json();
+        console.log(data);
+        document.getElementById("points").innerText = data['points'];
+        document.getElementById("h5").innerText = `Just ${80 - data['points']} more to achieve your Goal!`;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Font Awesome JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+
+</html>

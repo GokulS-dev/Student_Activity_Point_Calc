@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <title>SAP</title>
+    <link rel="stylesheet" href="../static/style2.css" />
+    <style>
+        body {
+            height: 100vh !important;
+            background-color: #ffffff;
+            margin-top: 70px;
+            /* Add margin to the top */
+            /* overflow: hidden; Prevent scrolling */
+        }
+
+        .form-container {
+            overflow: hidden;
+            /* Prevent scrolling within the form container */
+        }
+    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css"
+        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/regular.min.css"
+        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha384-nvAa0jO3t5VST7w5F5e/Ky5m5r5G+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/822b82dc31.js" crossorigin="anonymous"></script>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <img src="../static/WhatsApp Image 2024-04-29 at 21.40.47_30824d57.jpg" width="30px" height="30px"
+                    class="mr-2" alt="Logo">
+                Kongu Engineering College
+            </a>
+            <!-- <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>         -->
+        </div>
+    </nav>
+
+
+<div class="container">
+    <form action="/Process_image" id="form" method="POST" enctype="multipart/form-data" class="needs-validation">
+        <h1 id="h1">Claim SAP</h1>
+        <div class="mb-3">
+            <label for="roll_no" class="form-label">Roll No</label>
+            <input type="text" id="roll_no" name="roll_no" class="form-control" placeholder="Enter your roll number" required>
+            <div class="invalid-feedback">Please provide a valid roll number (4 digits).</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Location</label>
+            <div class="form-check">
+                <input type="radio" id="inside" name="location" value="inside" class="form-check-input" required>
+                <label for="inside" class="form-check-label">Inside</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="outside" name="location" value="outside" class="form-check-input" required>
+                <label for="outside" class="form-check-label">Outside</label>
+            </div>
+            <div class="invalid-feedback">Please select a location.</div>
+        </div>
+        <div class="mb-3 college-name-group">
+            <label for="cname" class="form-label">College Name</label>
+            <input type="text" id="cname" name="cname" class="form-control" placeholder="Enter your college name"
+                   aria-describedby="collegeHelp">
+            <small id="collegeHelp" class="form-text text-muted">Required if location is outside.</small>
+            <div class="invalid-feedback">Please provide your college name.</div>
+        </div>
+        <div class="mb-3">
+            <label for="eventname" class="form-label">Event Name</label>
+            <input type="text" id="eventname" name="eventname" class="form-control"
+                   placeholder="Enter the event name" required>
+            <div class="invalid-feedback">Please provide the event name.</div>
+        </div>
+        <div class="mb-3">
+            <label for="eventcategories" class="form-label">Event Categories</label>
+            <select id="eventcategories" class="form-select" required>
+                <option value="-select-">- Select -</option>
+                <option value="PROJECT">PROJECT</option>
+                <option value="PAPER">PAPER</option>
+            </select>
+            <div class="invalid-feedback">Please select an event category.</div>
+        </div>
+        <div class="mb-3">
+            <label for="file" class="form-label">Choose File (Max. 400kb)</label>
+            <input type="file" id="file" name="file" class="form-control" accept=".jpg, .jpeg, .png" required>
+            <div class="invalid-feedback">Please choose a file.</div>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" id="agree" class="form-check-input" required>
+            <label for="agree" class="form-check-label">I agree above information</label>
+            <div class="invalid-feedback">You must agree before submitting.</div>
+        </div>
+        <div style="text-align: center;">
+            <button type="submit" id="btn" class="btn btn-primary">Register</button>
+        </div>
+    </form>
+</div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        //cname
+        document.addEventListener('DOMContentLoaded', function () {
+            const outsideRadio = document.getElementById('outside');
+            const insideRadio = document.getElementById('inside');
+            const collegeNameGroup = document.querySelector('.college-name-group');
+            const fileInput = document.getElementById('file');
+            const fileInputLabel = document.querySelector('label[for="file"]');
+
+            outsideRadio.addEventListener('change', function () {
+                if (this.checked) {
+                    collegeNameGroup.style.display = 'block';
+                } else {
+                    collegeNameGroup.style.display = 'none';
+                }
+            });
+
+            insideRadio.addEventListener('change', function () {
+                if (this.checked) {
+                    collegeNameGroup.style.display = 'none';
+                }
+            });
+
+            fileInput.addEventListener('change', function () {
+                const fileSize = this.files[0].size; // size in bytes
+                const maxSize = 400 * 1024; // 400kb in bytes
+
+                if (fileSize > maxSize) {
+                    this.value = ''; // Clear the file input
+                    fileInputLabel.textContent = 'File size exceeds 400kb limit';
+                    fileInputLabel.classList.add('text-danger');
+                } else {
+                    fileInputLabel.textContent = 'Choose File (Max. 400kb)';
+                    fileInputLabel.classList.remove('text-danger');
+                }
+            });
+        });
+
+    </script>
+
+    <!-- Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copyright Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container1 {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        select,
+        input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            background-color: #FFBF00;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #eeb70f;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+    <!--Bootstrap-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/style2.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <img src="../static/WhatsApp Image 2024-04-29 at 21.40.47_30824d57.jpg" width="30px" height="30px"
+                    class="mr-2" alt="Logo">
+                Kongu Engineering College
+            </a>
+        </div>
+    </nav>
+    <div class="container1">
+        <h2>Participation Form</h2>
+        <form enctype="multipart/form-data" id="copyrightForm">
+            <label for="SCIindex">SCI Index:</label>
+            <select name="SCIindex" id="SCIindex">
+                <option value="Select">--Select--</option>
+                <option value="Submitted1">Submitted</option>
+                <option value="Published1">Published</option>
+            </select>
+            <label for="wos">WOS/Scopus/Journals/Conference:</label>
+            <select name="wos" id="wos">
+                <option value="Select">--Select--</option>
+                <option value="Submitted2">Submitted</option>
+                <option value="Published2">Published</option>
+            </select>
+            <label for="patent">Patent:</label>
+            <select name="patent" id="patent">
+                <option value="Select">--Select--</option>
+                <option value="applied1">Applied</option>
+                <option value="Published3">Published</option>
+                <option value="obtain">Obtained</option>
+            </select>
+            <label for="copyright">Copyright:</label>
+            <select name="copyright" id="copyright">
+                <option value="Select">--Select--</option>
+                <option value="applied2">Applied</option>
+                <option value="Published4">Published</option>
+            </select>
+            <label for="certificate">Upload Certificate:</label>
+            <input type="file" name="certificate" id="certificate" accept=".pdf,.jpg,.png">
+            <div id="certificateError" class="error-message"></div>
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <div id="result" style="margin-top: 20px;"></div>
+    </div>
+
+<script>
+
+    document.getElementById("copyrightForm").addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        var SCIindex = document.getElementById("SCIindex").value;
+        var wos = document.getElementById("wos").value;
+        var patent = document.getElementById("patent").value;
+        var copyright = document.getElementById("copyright").value;
+        var certificateFile = document.getElementById("certificate").files[0];
+
+        var points = 0;
+
+        if (SCIindex === "Submitted1") {
+            points += 10;
+        } else if (SCIindex === "Published1") {
+            points += 50;
+        }
+
+        if (wos === "Submitted2") {
+            points += 10;
+        } else if (wos === "Published2") {
+            points += 30;
+        }
+
+        if (patent === "applied1") {
+            points += 10;
+        } else if (patent === "Published3") {
+            points += 20;
+        } else if (patent === "obtain") {
+            points += 100;
+        }
+
+        if (copyright === "applied2") {
+            points += 5;
+        } else if (copyright === "Published4") {
+            points += 10;
+        }
+
+        document.getElementById("result").innerText = "Points: " + points;
+
+        var formData = new FormData();
+        formData.append("SCIindex", SCIindex);
+        formData.append("wos", wos);
+        formData.append("patent", patent);
+        formData.append("copyright", copyright);
+        formData.append("certificate", certificateFile);
+        formData.append("points", points);
+        formData.append("roll_no", localStorage.getItem("rollno"));
+
+        fetch("/submitParticipationForm", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            window.location.href = "/studentprofile";
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+
+    });
+
+</script>
+
+</body>
+
+</html>

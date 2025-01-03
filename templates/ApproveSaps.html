@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Approve requests</title>
+    <!--Bootstrap-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../static/style2.css">
+    <style>
+        /* Additional CSS */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .card {
+            flex: 0 0 calc(33.33% - 20px);
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card p {
+            margin-bottom: 5px;
+        }
+
+        .approve,
+        .decline,
+        .view {
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .card {
+                flex: 0 0 calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .card {
+                flex: 0 0 calc(100% - 20px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <img src="../static/WhatsApp Image 2024-04-29 at 21.40.47_30824d57.jpg" width="30px" height="30px"
+                    class="mr-2" alt="Logo">
+                Kongu Engineering College
+            </a>
+        </div>
+    </nav>
+    <div class="container" style="padding-top: 100px;">
+        <div id="requests" class="card-container"></div>
+    </div>
+    <div id="image">
+
+    </div>
+    <script>
+        window.onload = async () => {
+            try {
+                const response = await fetch('/getrequests');
+                if (!response.ok) {
+                    throw new Error("An error occurred!");
+                }
+                const data = await response.json();
+                const container = document.getElementById('requests');
+                data.forEach(item => {
+                    const requestDiv = document.createElement('div');
+                    requestDiv.classList.add('card');
+
+                    Object.keys(item).forEach(key => {
+                        const field = document.createElement('p');
+                        field.textContent = `${key}: ${item[key]}`;
+                        requestDiv.appendChild(field);
+                    });
+
+                    const approveBtn = document.createElement('button');
+                    approveBtn.textContent = 'Approve';
+                    approveBtn.classList.add('btn', 'btn-success', 'approve');
+                    approveBtn.addEventListener('click', async () => {
+                        try {
+                            const response = await fetch('/acceptrequest', {
+                                method: "POST",
+                                body: JSON.stringify(item),
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+                            if (!response.ok) {
+                                throw new Error("Some error occurred!");
+                            }
+                            const data = await response.json();
+                            console.log(data);
+                        } catch (error) {
+                            console.log(error);
+                        }
+                        requestDiv.remove();
+                    });
+                    requestDiv.appendChild(approveBtn);
+
+                    const declineBtn = document.createElement('button');
+                    declineBtn.textContent = 'Decline';
+                    declineBtn.classList.add('btn', 'btn-danger', 'decline');
+                    declineBtn.addEventListener('click', async () => {
+                        try {
+                            const response = await fetch('/deleterequest', {
+                                method: "POST",
+                                body: JSON.stringify(item),
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+                            if (!response.ok) {
+                                throw new Error("Some error occurred!");
+                            }
+                            const data = await response.json();
+                            console.log(data);
+                        } catch (error) {
+                            console.log(error);
+                        }
+                        requestDiv.remove();
+                    });
+                    requestDiv.appendChild(declineBtn);
+
+                    container.appendChild(requestDiv);
+
+                    const viewBtn = document.createElement('button');
+                    viewBtn.textContent = 'View Details';
+                    viewBtn.classList.add('btn', 'btn-primary', 'view');
+                    viewBtn.addEventListener('click', async () => {
+                        try {
+                            const response = await fetch(`/viewrequest?id=${item._id}`);
+                            if (!response.ok) {
+                                throw new Error("Some error occurred!");
+                            }
+                            const data = await response.json();
+                            console.log(data);
+                            let filepath = data.filepath;
+                            filepath = "../"+filepath.replace("\\","/");
+                            console.log(filepath);
+                            document.getElementById("image").innerHTML = `<div class="container"><img src="${filepath}" alt="image" /></div>`
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    });
+                    requestDiv.appendChild(viewBtn);
+
+                    container.appendChild(requestDiv);
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        };
+    </script>    
+    <!-- Your script and other links -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

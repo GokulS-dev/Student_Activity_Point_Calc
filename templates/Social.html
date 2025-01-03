@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Activities Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        .container1 {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="checkbox"], input[type="file"] {
+            margin: 8px 0;
+        }
+        input[type="submit"] {
+            width: 100%;
+            background-color: #FFBF00;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #eeb70f;
+        }
+    </style>
+    <!--Bootstrap-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/style2.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <img src="../static/WhatsApp Image 2024-04-29 at 21.40.47_30824d57.jpg" width="30px" height="30px"
+                    class="mr-2" alt="Logo">
+                Kongu Engineering College
+            </a>
+        </div>
+    </nav>
+    <div class="container1">
+        <h2>Social Activities Form</h2>
+        <form id="socialForm" enctype="multipart/form-data">
+            <label><input type="checkbox" name="socialService">Social service Eg: Blood Donation</label><br>
+            <label><input type="checkbox" name="oneOrTwoWeekCamp">1 or 2 weeks camp (NSS/NCC)</label><br>
+            <label><input type="checkbox" name="moreThanTwoWeekCamp">More than 2 week camp (NSS/NCC)</label><br>
+            <label for="certificate">Upload Certificate:</label><br>
+            <input type="file" name="certificate" id="certificate" accept=".pdf,.jpg,.png">
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <div id="result" style="margin-top: 20px;"></div>
+    </div>
+
+    <script>
+
+        document.getElementById("socialForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var socialService = document.querySelector('input[name="socialService"]').checked;
+            var oneOrTwoWeekCamp = document.querySelector('input[name="oneOrTwoWeekCamp"]').checked;
+            var moreThanTwoWeekCamp = document.querySelector('input[name="moreThanTwoWeekCamp"]').checked;
+
+            var points = 0;
+            if (socialService) {
+                points += 5;
+            }
+            if (oneOrTwoWeekCamp) {
+                points += 30;
+            }
+            if (moreThanTwoWeekCamp) {
+                points += 50;
+            }
+
+            var formData = new FormData();
+            formData.append("points", points);
+            formData.append("roll_no", localStorage.getItem("rollno"));
+            formData.append("certificate", document.getElementById("certificate").files[0]);
+            formData.append("socialService", socialService);
+            formData.append("oneOrTwoWeekCamp", oneOrTwoWeekCamp);
+            formData.append("moreThanTwoWeekCamp", moreThanTwoWeekCamp);
+
+            fetch("/submitParticipationForm", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("result").innerText = "Points: " + points;
+                window.location.href = "/studentprofile";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>

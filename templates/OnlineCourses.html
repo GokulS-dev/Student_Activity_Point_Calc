@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Course Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        .container1 {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"], select, input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            background-color: #FFBF00;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #eeb70f;
+        }
+    </style>
+    <!--Bootstrap-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/style2.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <img src="../static/WhatsApp Image 2024-04-29 at 21.40.47_30824d57.jpg" width="30px" height="30px"
+                    class="mr-2" alt="Logo">
+                Kongu Engineering College
+            </a>
+        </div>
+    </nav>
+    <div class="container1">
+        <h2>Participation Form</h2>
+        <form id="courseForm" enctype="multipart/form-data">
+            <label for="courseType">Course Type:</label>
+            <select name="courseType" id="courseType">
+                <option value="Select">--Select--</option>
+                <option value="ValueAddedCourse">Value Added Course</option>
+                <option value="OneCreditCourse">One Credit Course</option>
+                <option value="TwoCreditCourse">Two Credit Course</option>
+                <option value="GreaterThanThree">More Than Two Credit</option>
+            </select>
+
+            <label for="certificate">Upload Certificate:</label>
+            <input type="file" name="certificate" id="certificate" accept=".pdf,.jpg,.png">
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <div id="result" style="margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        var points = 0;
+
+        function calculatePoints() {
+            var courseType = document.getElementById("courseType").value;
+
+            if (courseType === "ValueAddedCourse") {
+                points = 5;
+            } else if (courseType === "OneCreditCourse") {
+                points = 10;
+            } else if (courseType === "TwoCreditCourse") {
+                points = 20;
+            } else if (courseType === "GreaterThanThree") {
+                points = 30;
+            }
+
+            return points;
+        }
+
+        document.getElementById("courseForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var formData = new FormData();
+            formData.append("roll_no", localStorage.getItem("rollno"));
+            formData.append("points", calculatePoints());
+            // Append selected course type to FormData
+            formData.append("courseType", document.getElementById("courseType").value);
+            // Append file to FormData
+            formData.append("certificate", document.getElementById("certificate").files[0]);
+
+            fetch("/submitParticipationForm", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("result").innerText = "Points: " + calculatePoints();
+                window.location.href = "/studentprofile";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>

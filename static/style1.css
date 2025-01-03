@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    height: 100vh !important;
+    /* overflow-y: hidden; Prevent vertical scrolling */
+}
+
+.container {
+    width: 100vw !important;
+}
+
+.navbar {
+    background-color: #FFBF00;
+    margin-bottom: 50px;
+}
+
+.navbar-brand {
+    color: #ffffff;
+}
+
+.navbar-nav {
+    text-align: right;
+}
+
+.navbar #myMenu .custom-nav .nav-item a {
+    color: #ffffff;
+    text-align: right;
+}
+
+.fa-caret-down {
+    color: white;
+}
+
+.navbar .logo img {
+    width: 50px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.toggle_btn {
+    display: none;
+}
+
+.navbar-collapse {
+    justify-content: flex-end; /* Align items to the right */
+}
+
+.navbar-collapse .navbar-nav .nav-item{
+    margin-left: 10px; /* Adjust spacing between links */
+}
+
+.navbar-collapse .navbar-nav .nav-link {
+    color: #ffffff;
+}
+
+.navbar-collapse .navbar-nav .nav-link:hover {
+    color: #dddddd;
+}
+
+.profile-link {
+    color: #ffffff;
+    margin-left: 10px; /* Adjust spacing between links */
+}
+
+.profile-link:hover {
+    color: #FFBF00;
+}
+
+.form-container {
+    width: auto;
+    margin-top: 50px;
+    max-width: 500px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="email"],
+input[type="password"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    width: 100% !important;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #FFBF00;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #FFBF00;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #FFA500;
+}
+
+.page {
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}

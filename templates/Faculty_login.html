@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+  <title>faculty_login</title>
+  <link rel="stylesheet" href="../static/style1.css" />
+  <style>
+    body {
+      height: 100vh !important;
+      background-color: #ffffff;
+      margin-top: 70px;
+      /* Add margin to the top */
+      overflow: hidden;
+      /* Prevent scrolling */
+    }
+
+    .form-container {
+      overflow: hidden;
+      /* Prevent scrolling within the form container */
+    }
+  </style>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+    integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css"
+    integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/regular.min.css"
+    integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha384-nvAa0jO3t5VST7w5F5e/Ky5m5r5G+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/822b82dc31.js" crossorigin="anonymous"></script>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a href="#" class="navbar-brand">
+        <img src="../static/WhatsApp Image 2024-04-29 at 21.40.47_30824d57.jpg" width="30px" height="30px" class="mr-2"
+          alt="Logo">
+        Kongu Engineering College
+      </a>
+    </div>
+  </nav>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 d-flex justify-content-center align-items-center">
+        <div class="text-center pt-5">
+          <h2>Welcome to the <span style="color: orange;">SAP</span></h2>
+          <p class="pt-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea fuga laudantium quisquam qui
+            delectus voluptate ipsum rerum dignissimos ullam, obcaecati dolores neque quod aliquam incidunt explicabo,
+            laboriosam dolorum? Magnam, labore?</p>
+          <img src="../static/faculty_.svg" alt="" style="width: 200px; height: 200px;" class="pt-3">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-container">
+          <h2>Faculty Login</h2>
+          <form id="form">
+            <div>
+              <label for="email">Email:</label><br />
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div>
+              <label for="password">password:</label><br />
+              <input type="password" id="password" name="password" required />
+            </div>
+            <div class="text-center">
+              <button type="submit">Sign-in</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+    document.getElementById('form').addEventListener('submit', async () => {
+      event.preventDefault();
+      try {
+        const formData = new FormData(document.getElementById('form'));
+        const response = await fetch('/Faculty_login', {
+          method: 'POST',
+          body: formData
+        });
+        if (!response.ok) {
+          throw new Error("An error occurred!");
+        }
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("name", data.name);
+        window.location.href = "/Faculty_home";
+      } catch (error) {
+        console.log(error);
+      }
+    })
+
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

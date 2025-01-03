@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+  <title>landing</title>
+  <link rel="stylesheet" href="../static/style.css" />
+  <style>
+    body {
+      min-height: 100vh;
+      /* Set minimum height to the viewport height */
+      margin: 0;
+      /* Remove default margin */
+      display: flex;
+      /* Use flexbox */
+      flex-direction: column;
+      /* Arrange children in column direction */
+      justify-content: space-between;
+      /* Align content with space between */
+    }
+
+    .full {
+      flex-grow: 1;
+      /* Allow the div to grow and take remaining space */
+      display: flex;
+      /* Use flexbox */
+      justify-content: center;
+      /* Center horizontally */
+      align-items: center;
+      /* Center vertically */
+    }
+
+    .form-container {
+      overflow: hidden;
+      /* Prevent scrolling within the form container */
+    }
+
+    .svg-container {
+      position: relative;
+      text-align: center;
+    }
+
+    .svg-container h5 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .card {
+      width: 200px;
+      /* Set width of the card */
+      height: 200px;
+      /* Set height of the card */
+      border-radius: 10px;
+      /* Add border-radius for rounded corners */
+      overflow: hidden;
+      /* Hide overflow to prevent image from overflowing */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
+      /* Add shadow effect */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      /* Move the card slightly upwards on hover */
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+      /* Add a stronger shadow effect on hover */
+    }
+
+
+    .card-title {
+      text-align: center;
+      /* Center the card title */
+    }
+
+    .card-img-top {
+      width: 100%;
+      /* Set width of the image to 100% of the card */
+      height: 100%;
+      /* Set height of the image to 100% of the card */
+      object-fit: cover;
+      /* Fill the image inside the container */
+    }
+
+    .footer {
+      background-color: #FFBF00;
+      /* Set footer background color */
+      color: white;
+      /* Set text color */
+      text-align: center;
+      /* Center align text */
+      padding: 10px 0;
+      /* Add smaller padding */
+      width: 100%;
+      /* Full width */
+    }
+
+    .footer-icons {
+      margin-top: 5px;
+      /* Add smaller margin */
+    }
+
+    .footer-icons a {
+      color: white;
+      /* Set icon color */
+      margin: 0 8px;
+      /* Add smaller margin between icons */
+    }
+
+    .footer-text {
+      font-size: 12px;
+      /* Set smaller font size for text */
+    }
+  </style>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+    integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css"
+    integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/regular.min.css"
+    integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha384-nvAa0jO3t5VST7w5F5e/Ky5m5r5G+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/822b82dc31.js" crossorigin="anonymous"></script>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a href="#" class="navbar-brand" style="color:#ffffff">
+        <img src="../static/WhatsApp Image 2024-04-29 at 21.40.47_30824d57.jpg" width="30px" height="30px" class="mr-2"
+          alt="Logo">
+        Kongu Engineering College
+      </a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="myMenu">
+        <ul class="navbar-nav ml-auto align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="#Home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#About">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="full">
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+          <h5>Student</h5>
+          <a href="/Student_login" class="card mb-4 shadow-sm">
+            <div>
+              <img src="../static/undraw_mathematics_-4-otb.svg" class="card-img-top" alt="Student Image">
+            </div>
+          </a>
+        </div>
+
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+          <h5>Faculty</h5>
+          <a href="/Faculty_login" class="card mb-4 shadow-sm">
+            <div>
+              <img src="../static/faculty_.svg" class="card-img-top" alt="Faculty Image">
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="contact">
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-icons">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+        </div>
+        <div class="footer-text">
+          <p>&copy; 2024 Kongu Engineering College</p>
+          <p>Contact: +1-234-567-8901 | Email: info@example.com</p>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <!-- Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
